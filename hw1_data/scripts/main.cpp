@@ -6,11 +6,12 @@
 #include <iomanip>
 
 
+int main(int argc, char const *argv[])
+{
+	if (argc != 5){
+		std::cerr<<"Usage: file_name input_file output_file width syle"
+		return -1;
+	}
 
-int main(){
-
-std::cout<<"test"<<std::endl;
-
-return 1;
-
+	return 0;
 }
