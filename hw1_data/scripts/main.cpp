@@ -12,11 +12,25 @@
 
 std::vector<std::string> getLines_Needed(const int &width, std::ofstream &fout, const std::vector<std::string> &words){
 
-	int lines_needed=1;
 	std::vector<std::string> formatted_words;
 	std::string formatted_word;
 	int line_count = 0;
 	for (int i = 0; i < words.size(); i++){
+		
+		//handle words > size of width
+		if (words[i].size() > width){
+			std::string tmp_word(formatted_word);
+			while(tmp_word.size() > width){
+
+			}
+			if (tmp_word.size() >0){
+
+			}
+			formatted_word = words[i] + ' ';
+			line_count = words[i].size();
+		}
+
+		//handle words < size of width
 		if (line_count + words[i].size() <= width){
 			line_count += words[i].size();
 			formatted_word.append(words[i]);
@@ -26,7 +40,6 @@ std::vector<std::string> getLines_Needed(const int &width, std::ofstream &fout, 
 			formatted_word.erase(formatted_word.size()-1, 1);
 			formatted_words.push_back(formatted_word);
 			formatted_word = words[i] + ' ';
-			lines_needed++;
 			line_count = words[i].size();
 			
 		}
