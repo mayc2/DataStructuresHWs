@@ -9,7 +9,7 @@
 //       Success = 0
 //       Failure = 1
 
-/*
+
 vector<string> getLines_Needed(ifstream &in, const int &width, ofstream &ostr){
 	int longest_line_num = 0;
 	string longest_line_string;
@@ -55,7 +55,7 @@ vector<string> getLines_Needed(ifstream &in, const int &width, ofstream &ostr){
 	}
 	return formatted_words;
 }
-*/
+
 
 //check that style exists
 int check_style(std::string style){
