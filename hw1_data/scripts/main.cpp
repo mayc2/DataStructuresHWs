@@ -62,10 +62,6 @@ void read_input_file(std::ifstream& fin, const char * input_file, std::vector<st
 	}
 }
 
-void implement_style(const std::vector<std::string> &lines, const std::string &style, std::ofstream &fout){
-
-}
-
 void print_line(const int &width,std::ofstream &fout){
 	fout<<"----";
 	for (int i=0; i<width; ++i) { fout<<"-"; }
@@ -87,6 +83,26 @@ void print_left_just(const std::vector<std::string> &lines,const int &width,std:
 	print_line(width, fout);
 }
 
+void print_right_just(const std::vector<std::string> &lines,const int &width,std::ofstream &fout){
+
+}
+
+void print_full_just(const std::vector<std::string> &lines,const int &width,std::ofstream &fout){
+
+}
+
+
+void implement_style(const std::vector<std::string> &lines, const std::string &style, std::ofstream &fout, const int &width){
+	if(style=="flush_left"){
+		
+	}
+	else if(style=="flush_right"){
+
+	} 
+	else if(style=="full_justify"){
+
+	}
+}
 
 int main(int argc, char *argv[])
 {
@@ -124,9 +140,7 @@ int main(int argc, char *argv[])
 	std::vector<std::string> lines=getLines_Needed(width, fout, words);
 
 	//selects proper style functions and executes
-	implement_style(lines,style,fout);
-
-	print_left_just(lines,width,fout);
+	implement_style(lines,style,fout,width);
 
  	return 0;
 }
