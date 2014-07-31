@@ -59,6 +59,10 @@ void read_input_file(std::ifstream& fin, const char * input_file, std::vector<st
 	}
 }
 
+void implement_style(const std::vector<std::string> &lines, const std::string &style, std::ofstream &fout){
+
+}
+
 void print_line(const int &width,std::ofstream &fout){
 	fout<<"----";
 	for (int i=0; i<width; ++i) { fout<<"-"; }
@@ -107,13 +111,19 @@ int main(int argc, char *argv[])
 	}
 	std::cout<<std::endl<<std::endl;
 
-	//check style and implement
-	if(check_style(style)!=0){
+	//check style
+	if(check_style(style)==0){
 		std::cerr<<"Usage: Argument 5 (formatting style) options: flush_left, flush_right, full_justify"<<std::endl;
 		return 1;
 	}
 
-	
+	//vector holding proper words per line
+	std::vector<std::string> lines;
+
+	//selects proper style functions and executes
+	implement_style(words,lines,style,fout);
+
+	print_left_just(words,width,fout);
 
  	return 0;
 }
