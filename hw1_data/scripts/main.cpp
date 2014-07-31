@@ -10,32 +10,50 @@
 //       Failure = 1
 
 /*
-void getLines_Needed(std::ifstream &in, const int &width){
-		
-	std::vector<std::string> formatted_words;
-	std::string formatted_word;
+vector<string> getLines_Needed(ifstream &in, const int &width, ofstream &ostr){
+	int longest_line_num = 0;
+	string longest_line_string;
+	vector<string> words;
+	string word;
+	int lines_needed=1;
+	while (in>>word){
+		words.push_back(word);
+	}
+	
+	vector<string> formatted_words;
+	string formatted_word;
 	int line_count = 0;
 	for (int i = 0; i < words.size(); i++){
-		if (line_count + words[i].size() < width){
+		if (line_count + words[i].size() <= width){
 			line_count += words[i].size();
 			formatted_word.append(words[i]);
 			formatted_word.append(" ");
 		}
 		else{
-			
+			formatted_word.erase(formatted_word.size()-1, 1);
+			//if (formatted_word.size() > longest_line_num) {
+				//longest_line_num = formatted_word.size();
+				//longest_line_string = formatted_word;
+			//}
 			formatted_words.push_back(formatted_word);
 			formatted_word = words[i] + ' ';
 			lines_needed++;
 			line_count = words[i].size();
-			if (i == words.size()-1) formatted_words.push_back(words[i]);
+			
+		}
+		// to get the last line in the text
+		if (i == words.size()-1) {
+			formatted_word.erase(formatted_word.size()-1, 1);
+			formatted_words.push_back(formatted_word);
 		}
 		line_count++;
 		
 	}
 	
 	for (int i = 0; i < formatted_words.size(); i++){
-		std::cout << formatted_words[i] << "\n";
+		ostr << formatted_words[i] << "\n";
 	}
+	return formatted_words;
 }
 */
 
