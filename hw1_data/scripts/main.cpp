@@ -76,6 +76,10 @@ void print_left_just(const std::vector<std::string> &lines,const int &width,std:
 	for(int i=0; i<lines.size();++i){
 		fout<<"| ";
 		fout<<lines[i];
+		int spaces=width-lines[i].size();
+		for (int j=0; j<spaces; ++j){
+			fout<<" ";
+		}
 		fout<<" |"<<std::endl;
 	}
 
@@ -84,7 +88,22 @@ void print_left_just(const std::vector<std::string> &lines,const int &width,std:
 }
 
 void print_right_just(const std::vector<std::string> &lines,const int &width,std::ofstream &fout){
+	//print the top line
+	print_line(width, fout);
 
+	//print middle lines
+	for(int i=0; i<lines.size();++i){
+		fout<<"| ";
+		int spaces=width-lines[i].size();
+		for (int j=0; j<spaces; ++j){
+			fout<<" ";
+		}
+		fout<<lines[i];
+		fout<<" |"<<std::endl;
+	}
+
+	//print the bottom line
+	print_line(width, fout);
 }
 
 void print_full_just(const std::vector<std::string> &lines,const int &width,std::ofstream &fout){
@@ -94,13 +113,13 @@ void print_full_just(const std::vector<std::string> &lines,const int &width,std:
 
 void implement_style(const std::vector<std::string> &lines, const std::string &style, std::ofstream &fout, const int &width){
 	if(style=="flush_left"){
-		
+		print_left_just(lines,width,fout);
 	}
 	else if(style=="flush_right"){
-
+		print_right_just(lines,width,fout);
 	} 
 	else if(style=="full_justify"){
-
+		print_full_just(lines,width,fout);
 	}
 }
 
