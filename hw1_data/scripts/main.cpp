@@ -39,37 +39,45 @@ void getLines_Needed(std::ifstream &in, const int &width){
 }
 */
 
+//check that style exists
+int check_style(std::string style){
+	if(style=="flush_left")			{return 0;}
+	else if(style=="flush_right")	{return 0;} 
+	else if(style=="full_justify")	{return 0;}
+	else 							{return 1;}
+}
+
 //reads input file into a vector using fstream
-void read_input_file(std::ifstream& istr, const char * input_file, std::vector<std::string>& words){
-	if (!istr){
+void read_input_file(std::ifstream& fin, const char * input_file, std::vector<std::string>& words){
+	if (!fin){
 		std::cerr<<"Could not open input_file, "<<input_file<<std::endl;
 		exit(1);
 	}
 	std::string temp;
-	while(istr>>temp){
+	while(fin>>temp){
 		words.push_back(temp);
 	}
 }
 
-void print_line(const int &width){
-	std::cout<<"----";
-	for (int i=0; i<width; ++i) { std::cout<<"-"; }
-	std::cout<<std::endl;
+void print_line(const int &width,std::ofstream &fout){
+	fout<<"----";
+	for (int i=0; i<width; ++i) { fout<<"-"; }
+	fout<<std::endl;
 }
 
-void print_left_just(const std::vector<std::string> &lines,const int &width){
+void print_left_just(const std::vector<std::string> &lines,const int &width,std::ofstream &fout){
 	//print the top line
-	print_line(width);
+	print_line(width, fout);
 
 	//print middle lines
 	for(int i=0; i<lines.size();++i){
-		std::cout<<"| ";
-		std::cout<<lines[i];
-		std::cout<<" |"<<std::endl;
+		fout<<"| ";
+		fout<<lines[i];
+		fout<<" |"<<std::endl;
 	}
 
 	//print the bottom line
-	print_line(width);
+	print_line(width, fout);
 }
 
 
@@ -81,8 +89,8 @@ int main(int argc, char *argv[])
 	}
 	
 	//CLI arguments implementation
-	std::ifstream istr(argv[1]);
-	std::ofstream ostr(argv[2]);
+	std::ifstream fin(argv[1]);
+	std::ofstream fout(argv[2]);
 	std::string style=argv[4];
 	int width=atoi(argv[3]);
 
@@ -90,7 +98,7 @@ int main(int argc, char *argv[])
 	std::vector<std::string> words;
 
 	//read input file into words vector
-	read_input_file(istr,argv[1],words);
+	read_input_file(fin,argv[1],words);
 
 	//quick check to confirm words were added to vector properly
 	std::cout<<std::endl<<"Checking initial vector of parse from file"<<std::endl;
@@ -99,7 +107,15 @@ int main(int argc, char *argv[])
 	}
 	std::cout<<std::endl<<std::endl;
 
-	print_left_just(words,width);
+	//check style and implement
+	if(check_style(style)==0){
+		print_left_just(words,width,fout);
+	} else {
+		std::cerr<<"Usage: Argument 5 (formatting style) options: flush_left, flush_right, full_justify"<<std::endl;
+		return 1;
+	}
+
+	
 
  	return 0;
 }
