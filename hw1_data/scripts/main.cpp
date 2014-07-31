@@ -11,14 +11,7 @@
 
 /*
 void getLines_Needed(std::ifstream &in, const int &width){
-	
-	std::vector<std::string> words;
-	std::string word;
-	int lines_needed=1;
-	while (in>>word){
-		words.push_back(word);
-	}
-	
+		
 	std::vector<std::string> formatted_words;
 	std::string formatted_word;
 	int line_count = 0;
@@ -64,11 +57,16 @@ void print_line(const int &width){
 	std::cout<<std::endl;
 }
 
-void print(const std::vector<std::string> &lines,const int &width){
+void print_left_just(const std::vector<std::string> &lines,const int &width){
 	//print the top line
 	print_line(width);
 
-
+	//print middle lines
+	for(int i=0; i<lines.size();++i){
+		std::cout<<"| ";
+		std::cout<<lines[i];
+		std::cout<<" |"<<std::endl;
+	}
 
 	//print the bottom line
 	print_line(width);
@@ -88,11 +86,20 @@ int main(int argc, char *argv[])
 	std::string style=argv[4];
 	int width=atoi(argv[3]);
 
+	//vector holding each word of the input text file
 	std::vector<std::string> words;
+
+	//read input file into words vector
 	read_input_file(istr,argv[1],words);
+
+	//quick check to confirm words were added to vector properly
+	std::cout<<std::endl<<"Checking initial vector of parse from file"<<std::endl;
 	for(int i=0; i<words.size(); ++i){
 		std::cout<<words[i]<<std::endl;
 	}
+	std::cout<<std::endl<<std::endl;
+
+	print_left_just(words,width);
 
  	return 0;
 }
