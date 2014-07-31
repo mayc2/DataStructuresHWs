@@ -10,18 +10,11 @@
 //       Failure = 1
 
 
-vector<string> getLines_Needed(ifstream &in, const int &width, ofstream &ostr){
-	int longest_line_num = 0;
-	string longest_line_string;
-	vector<string> words;
-	string word;
+std::vector<std::string> getLines_Needed(const int &width, std::ofstream &fout, const std::vector<std::string> &words){
+
 	int lines_needed=1;
-	while (in>>word){
-		words.push_back(word);
-	}
-	
-	vector<string> formatted_words;
-	string formatted_word;
+	std::vector<std::string> formatted_words;
+	std::string formatted_word;
 	int line_count = 0;
 	for (int i = 0; i < words.size(); i++){
 		if (line_count + words[i].size() <= width){
@@ -31,10 +24,6 @@ vector<string> getLines_Needed(ifstream &in, const int &width, ofstream &ostr){
 		}
 		else{
 			formatted_word.erase(formatted_word.size()-1, 1);
-			//if (formatted_word.size() > longest_line_num) {
-				//longest_line_num = formatted_word.size();
-				//longest_line_string = formatted_word;
-			//}
 			formatted_words.push_back(formatted_word);
 			formatted_word = words[i] + ' ';
 			lines_needed++;
@@ -48,10 +37,6 @@ vector<string> getLines_Needed(ifstream &in, const int &width, ofstream &ostr){
 		}
 		line_count++;
 		
-	}
-	
-	for (int i = 0; i < formatted_words.size(); i++){
-		ostr << formatted_words[i] << "\n";
 	}
 	return formatted_words;
 }
@@ -115,6 +100,12 @@ int main(int argc, char *argv[])
 	std::ofstream fout(argv[2]);
 	std::string style=argv[4];
 	int width=atoi(argv[3]);
+	
+	//check style
+	if(check_style(style)!=0){
+		std::cerr<<"Usage: Argument 5 (formatting style) options: flush_left, flush_right, full_justify"<<std::endl;
+		return 1;
+	}
 
 	//vector holding each word of the input text file
 	std::vector<std::string> words;
@@ -129,19 +120,13 @@ int main(int argc, char *argv[])
 	}
 	std::cout<<std::endl<<std::endl;
 
-	//check style
-	if(check_style(style)==0){
-		std::cerr<<"Usage: Argument 5 (formatting style) options: flush_left, flush_right, full_justify"<<std::endl;
-		return 1;
-	}
-
 	//vector holding proper words per line
-	std::vector<std::string> lines;
+	std::vector<std::string> lines=getLines_Needed(width, fout, words);
 
 	//selects proper style functions and executes
-	implement_style(words,lines,style,fout);
+	implement_style(lines,style,fout);
 
-	print_left_just(words,width,fout);
+	print_left_just(lines,width,fout);
 
  	return 0;
 }
