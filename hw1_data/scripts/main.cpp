@@ -108,9 +108,7 @@ int main(int argc, char *argv[])
 	std::cout<<std::endl<<std::endl;
 
 	//check style and implement
-	if(check_style(style)==0){
-		print_left_just(words,width,fout);
-	} else {
+	if(check_style(style)!=0){
 		std::cerr<<"Usage: Argument 5 (formatting style) options: flush_left, flush_right, full_justify"<<std::endl;
 		return 1;
 	}
