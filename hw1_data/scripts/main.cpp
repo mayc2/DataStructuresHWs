@@ -84,6 +84,10 @@ std::vector<std::string> getLines_Needed(const int &width, std::ofstream &fout, 
 		
 		//handle words > size of width
 		if (words[i].size() > width){
+			if(formatted_word.size() > 0){
+				formatted_word.erase(formatted_word.size()-1, 1);
+				formatted_words.push_back(formatted_word);
+			}
 			std::string tmp_word(words[i]);
 			while(tmp_word.size() > width){
 				formatted_word=tmp_word.substr(0,width-1);
@@ -96,7 +100,6 @@ std::vector<std::string> getLines_Needed(const int &width, std::ofstream &fout, 
 				line_count = tmp_word.size();
 				formatted_word=tmp_word;
 				formatted_word.append(" ");
-				std::cout<<formatted_word<<std::endl;
 				line_count = formatted_word.size();
 			}
 		}
