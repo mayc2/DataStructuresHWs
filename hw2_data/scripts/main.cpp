@@ -16,6 +16,23 @@ int main(int argc, char const *argv[])
 		return 1;
 	}	
 
+	//initialize i/o streams to/from files
+	std::ifstream fin(argv[1]);
+	std::ofstream fout(argv[2]);
+
+	//check to confirm streams work
+	if(!fin){
+		std::cerr<<"Error: Unable to open input file."<<std::endl;
+		return 1;
+	}
+	if(!fout){
+		std::cerr<<"Error: unable to open output file."<<std<<endl;
+		return 1;
+	}
+
+	std::vector<Player> players;
+	std::vector<Team> teams;
+
 	parse_file();
 
 	return 0;
