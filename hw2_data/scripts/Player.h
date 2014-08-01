@@ -1,14 +1,30 @@
 class Player
 {
 public:
-	Player(arguments);
+
+	//CONSTRUCTORS
+	Player(const std::string &pn, const std::string &tn) : player_name(pn), player_team(tn){
+		goals=0;
+		assists=0;
+		penalties=0;
+	}
 	~Player();
 
-
 	//ACCESSORS
+	const std::string getName() {return player_name; }
+	const std::string getTeam() { return player_team; }
+	const int getGoals() { return goals; }
+	const int getAssists() { return assists; }
+	const int getPenalties() { return penalties; }
 
 	//MODIFIERS
-
+	void addGoals();
+	void addAssists();
+	void addPenalties();
+	void addGoals(const int &g);
+	void addAssists(const int &a);
+	void addPenalties(const int &p);
+	
 	//MEMBER FUNCTIONS
 
 private:
