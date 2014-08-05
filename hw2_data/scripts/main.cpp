@@ -8,8 +8,25 @@
 #include "Player.h"
 #include "Team.h"
 
-void parse_file(){
-	int i=0;
+void parse_file(std::vector<Player> &players, std::vector<Team> &teams, std::ifstream &fin){
+
+	std::string temp;
+	while(fin >> temp){
+
+		std::string team1,team2;
+		int score1,score2;
+		if(temp=="FINAL"){
+			fin>>team1>>score1>>team2>>score2;
+			
+			teams.find()
+		}
+		//handle goals
+
+		//handle penalties
+
+		//handle 
+
+	}
 }
 
 int main(int argc, char const *argv[])
@@ -37,7 +54,7 @@ int main(int argc, char const *argv[])
 	std::vector<Player> players;
 	std::vector<Team> teams;
 
-	parse_file();
+	parse_file(players,teams,fin);
 
 	std::cout<<"gets to end of main"<<std::endl;
 	return 0;
