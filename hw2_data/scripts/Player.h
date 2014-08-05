@@ -8,7 +8,6 @@ public:
 		assists=0;
 		penalties=0;
 	}
-	~Player();
 
 	//ACCESSORS
 	const std::string getName() {return player_name; }
@@ -28,9 +27,9 @@ public:
 	//MEMBER FUNCTIONS
 
 private:
-	const std::string player_name
-	const std::string player_team
-	int goals
-	int assists
-	int penalties
+	const std::string player_name;
+	const std::string player_team;
+	int goals;
+	int assists;
+	int penalties;
 };

@@ -8,6 +8,10 @@
 #include "Player.h"
 #include "Team.h"
 
+void parse_file(){
+	int i=0;
+}
+
 int main(int argc, char const *argv[])
 {
 	//check to ensure correct number of arguments
@@ -26,7 +30,7 @@ int main(int argc, char const *argv[])
 		return 1;
 	}
 	if(!fout){
-		std::cerr<<"Error: unable to open output file."<<std<<endl;
+		std::cerr<<"Error: unable to open output file."<<std::endl;
 		return 1;
 	}
 
@@ -35,5 +39,6 @@ int main(int argc, char const *argv[])
 
 	parse_file();
 
+	std::cout<<"gets to end of main"<<std::endl;
 	return 0;
 }

@@ -10,7 +10,6 @@ public:
 		penalties=0;
 		games_played=0;
 	}
-	~Team();
 
 	//ACCESSORS
 	const std::string getName() { return team_name; }
@@ -40,12 +39,12 @@ public:
 	//MEMBER FUNCTIONS
 	
 private:
-	const std::string team_name
-	int wins
-	int losses
-	int ties
-	float win_percentage
-	int goals
-	int penalties
-	int games_played
+	const std::string team_name;
+	int wins;
+	int losses;
+	int ties;
+	float win_percentage;
+	int goals;
+	int penalties;
+	int games_played;
 };
