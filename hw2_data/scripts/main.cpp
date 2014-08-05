@@ -5,20 +5,46 @@
 #include <cmath>
 #include <iomanip>
 #include <fstream>
+#include <map>
 #include "Player.h"
 #include "Team.h"
 
-void parse_file(std::vector<Player> &players, std::vector<Team> &teams, std::ifstream &fin){
+void parse_file(std::map<std::string,Player> &players, std::map<std::string,Team> &teams, std::ifstream &fin){
 
 	std::string temp;
 	while(fin >> temp){
-
+		std::map<std::string,Player>::iterator player_it;
+		
+		//handles team(wins,losses,games_played statistics)
+		std::map<std::string,Team>::iterator team_it1;
+		std::map<std::string,Team>::iterator team_it2;
 		std::string team1,team2;
 		int score1,score2;
 		if(temp=="FINAL"){
 			fin>>team1>>score1>>team2>>score2;
-			
-			teams.find()
+			team_it1=players.find(team1);
+			team_it2=players.find(team2);
+			//if team 1 won
+			if(score1 > score2){
+				team_it1->second.addWins();
+				team_it2->second.addLosses();
+				team_it1->second.addGP();
+				team_it2->second.addGP();
+			}
+			//if team 1 lost
+			else if (score1 < score2){
+				team_it1->second.addLosses();
+				team_it2->second.addWins();
+				team_it1->second.addGP();
+				team_it2->second.addGP();
+			}
+			//if tied
+			else{
+				team_it1->second.addTies();
+				team_it2->second.addTies();
+				team_it1->second.addGP();
+				team_it2->second.addGP();
+			}
 		}
 		//handle goals
 
@@ -51,8 +77,8 @@ int main(int argc, char const *argv[])
 		return 1;
 	}
 
-	std::vector<Player> players;
-	std::vector<Team> teams;
+	std::map<std::string,Player> players;
+	std::map<std::string,Team> teams;
 
 	parse_file(players,teams,fin);
 
