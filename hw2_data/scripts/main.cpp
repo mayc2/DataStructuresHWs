@@ -13,6 +13,8 @@ void parse_file(std::map<std::string,Player> &players, std::map<std::string,Team
 
 	std::string temp;
 	while(fin >> temp){
+		std::cout<<temp<<std::endl;
+
 		std::map<std::string,Player>::iterator player_it;
 		
 		//handles team(wins,losses,games_played statistics)
