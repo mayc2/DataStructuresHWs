@@ -48,3 +48,17 @@ private:
 	int penalties;
 	int games_played;
 };
+
+bool operator< (const Team& t1, const Team& t2) {
+	return t1.getName() < t2.getName();
+}
+
+bool operator= (const Team &t1){
+	wins=t1.getWins();
+	losses=t1.getLosses();
+	ties=t1.getTies();
+	win_percentage=t1.getWinPerc();
+	goals=t1.getGoals();
+	penalties=t1.getPenalties();
+	games_played=t1.getGP();
+}

@@ -33,3 +33,7 @@ private:
 	int assists;
 	int penalties;
 };
+
+bool operator< (const Player &p1, const Player &p2){
+	return p1.getName() < p2.getName();
+}
